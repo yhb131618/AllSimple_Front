@@ -13,10 +13,12 @@ import {
 } from "../../constant";
 import {useCookies} from "react-cookie";
 import {useBoardStore, useLoginUserStore} from "../../stores";
-import {fileUploadRequest, patchBoardRequset, postBoardRequest} from "../../apis";
+import {fileUploadRequest, patchBoardRequset, postBoardRequest, signOutRequest} from "../../apis";
 import {PatchBoardRequestDto, PostBoardRequestDto} from "../../apis/request/board";
 import {PatchBoardResponseDto, PostBoardResponseDto} from "../../apis/response/board";
 import {ResponseDto} from "../../apis/response";
+import {SignOutRequestDto} from "../../apis/request/auth";
+import {SignOutResponseDto} from "../../apis/response/auth";
 
 export default function Header() {
 
@@ -107,7 +109,24 @@ export default function Header() {
             navigate(USER_PATH(email));
         }
 
+        const signOutResponse = (responseBody: SignOutResponseDto | ResponseDto | null) => {
+            if(!responseBody) {
+                alert('네트워크 이상입니다.');
+                return;
+            }
+
+            const { code } = responseBody;
+
+            if(code === 'DBE') alert('데이터베이스 오류입니다');
+            if(code !== 'SU') return;
+        }
+
         const onSignOutButtonClickHandler = () => {
+            const accessToken = cookies.accessToken;
+            const refreshToken = cookies.refreshToken;
+            const requestBody: SignOutRequestDto = { accessToken, refreshToken };
+            signOutRequest(requestBody).then(signOutResponse);
+
             resetLoginUser();
             setCookies('accessToken', '', { path: MAIN_PATH(), expires: new Date() });
             setCookies('refreshToken', '', { path: MAIN_PATH(), expires: new Date() });

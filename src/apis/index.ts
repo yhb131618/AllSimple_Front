@@ -1,4 +1,4 @@
-import {SignInRequestDto, SignUpRequestDto} from "./request/auth";
+import {SignInRequestDto, SignOutRequestDto, SignUpRequestDto} from "./request/auth";
 import axios from "axios";
 import {SignInResponseDto, SignUpResponseDto} from "./response/auth";
 import {ResponseDto} from "./response";
@@ -10,20 +10,20 @@ import {
 } from "./response/user";
 import {PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto} from "./request/board";
 import {
-    PostBoardResponseDto,
-    GetBoardResponseDto,
-    IncreaseViewCountResponseDto,
-    GetFavoriteListResponseDto,
-    GetCommentListResponseDto,
-    PutFavoriteResponseDto,
-    PostCommentReponseDto,
     DeleteBoardResponseDto,
-    PatchBoardResponseDto,
+    GetBoardResponseDto,
+    GetCommentListResponseDto,
+    GetFavoriteListResponseDto,
     GetLatestBoardLiseResponseDto,
+    GetSearchBoardListResponseDto,
     GetTop3BoardListResponseDto,
-    GetSearchBoardListResponseDto, GetUserBoardListResponseDto
+    GetUserBoardListResponseDto,
+    IncreaseViewCountResponseDto,
+    PatchBoardResponseDto,
+    PostBoardResponseDto,
+    PostCommentReponseDto,
+    PutFavoriteResponseDto
 } from "./response/board";
-import Authentication from "../views/Authentication";
 import {GetPopularListResponseDto, GetRelationListResponseDto} from "./response/search";
 import {PatchNicknameRequestDto, PatchProfileImageRequestDto} from "./request/user";
 
@@ -33,6 +33,7 @@ const API_DOMAIN = `${DOMAIN}/api/v1`;
 const authorization = (accessToken: string) => {
     return { headers: { Authorization: `Bearer ${accessToken}` }}};
 const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
+const SIGN_OUT_URL = () => `${API_DOMAIN}/auth/sign-out`;
 const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`;
 
 export const signInRequest = async (requestBody: SignInRequestDto) => {
@@ -49,6 +50,18 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
     return result;
 }
 
+export const signOutRequest = async (requestBody: SignOutRequestDto) => {
+    const result = await axios.post(SIGN_OUT_URL(), requestBody)
+        .then(response => {
+            const reponseBody: ResponseDto = response.data;
+            return reponseBody;
+        }).catch(error => {
+            if(!error.reseponse) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
 export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 
     const result = await axios.post(SIGN_UP_URL(), requestBody)
