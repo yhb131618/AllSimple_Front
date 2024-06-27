@@ -41,11 +41,12 @@ export default function Authentication() {
             if (code === "SF" || code === 'VF') setError(true);
             if (code !== "SU") return;
 
-            const {token, expirationTime} = responseBody as SignInResponseDto;
+            const { accessToken, refreshToken, expirationTime} = responseBody as SignInResponseDto;
             const now = new Date().getTime();
             const expires = new Date(now + expirationTime * 1000);
 
-            setCookie('accessToken', token, {expires, path: MAIN_PATH()});
+            setCookie('accessToken', accessToken, {expires, path: MAIN_PATH()});
+            setCookie('refreshToken', refreshToken, {expires, path: MAIN_PATH()});
             navigator(MAIN_PATH());
         }
 

@@ -49,7 +49,7 @@ function App() {
             resetLoginUser();
             return;
         }
-        getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+        getSignInUserRequest().then(getSignInUserResponse);
     }, [cookies.accessToken]);
 
 
