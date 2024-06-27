@@ -106,7 +106,7 @@ export default function BoardDetail() {
             if(!board || !boardNumber || !loginUser || !cookies.accessToken) return;
             if(loginUser.email !== board.writerEmail) return;
 
-            deleteBoardRequest(boardNumber, cookies.accessToken).then(deleteBoardResponse);
+            deleteBoardRequest(boardNumber).then(deleteBoardResponse);
             navigate(MAIN_PATH());
         }
 
@@ -239,7 +239,7 @@ export default function BoardDetail() {
 
         const onFavoriteClickHandler = () => {
             if(!boardNumber || !loginUser || !cookies.accessToken) return;
-            putFavoriteRequest(boardNumber, cookies.accessToken).then(putFavoriteReseponse);
+            putFavoriteRequest(boardNumber).then(putFavoriteReseponse);
         }
 
         const onShowFavoirteClickHandler = () => {
@@ -262,7 +262,7 @@ export default function BoardDetail() {
         const onCommentSubmitButtonClickHandler = () => {
             if(!comment || !boardNumber || !loginUser || !cookies.accessToken) return;
             const requestBody: PostCommentRequestDto = { comment };
-            postCommentRequest(boardNumber, requestBody, cookies.accessToken).then(postCommentResponse);
+            postCommentRequest(boardNumber, requestBody).then(postCommentResponse);
         }
 
 
