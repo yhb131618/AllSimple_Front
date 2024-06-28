@@ -523,7 +523,7 @@ export default function Authentication() {
         <div id='auth-wrapper'>
             <div className='auth-container'>
                 <div className='auth-jumbotron-box'>
-                    <div className='auth-jumbotron-contents'>
+                    <div className='auth-jumbotron-contents' onClick={()=> navigator(MAIN_PATH())}>
                         <div className='auth-logo-icon'></div>
                         <div className='auth-jumbotron-text-box'>
                             <div className='auth-jumbotron-text'>{'Yellow Board'}</div>
