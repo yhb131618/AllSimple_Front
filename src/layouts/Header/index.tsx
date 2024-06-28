@@ -28,13 +28,16 @@ export default function Header() {
 
     const cookies = new Cookies();
     const [isLogin, setLogin] = useState<boolean>(false);
-    const [isAuthPage, setAuthPage] = useState<boolean>(false);
-    const [isMainPage, setMainPage] = useState<boolean>(false);
-    const [isSearchPage, setSearchPage] = useState<boolean>(false);
-    const [isBoardDetailPage, setBoardDetailPage] = useState<boolean>(false);
-    const [isBoardWritePage, setBoardWritePage] = useState<boolean>(false);
-    const [isBoardUpdatePage, setBoardUpdatePage] = useState<boolean>(false);
-    const [isUserPage, setUserPage] = useState<boolean>(false);
+
+    const [pageState, setPageState] = useState({
+        isAuthPage: false,
+        isMainPage: false,
+        isSearchPage: false,
+        isBoardDetailPage: false,
+        isBoardWritePage: false,
+        isBoardUpdatePage: false,
+        isUserPage: false
+    });
 
     const navigate = useNavigate();
 
@@ -42,7 +45,6 @@ export default function Header() {
         navigate(MAIN_PATH());
     }
     const SearchButton = () => {
-
         const searchButtonRef = useRef<HTMLDivElement | null>(null);
 
         const [status, setStatus] = useState<boolean>(false);
@@ -70,7 +72,7 @@ export default function Header() {
         useEffect(()=> {
             if(searchWord) {
                 setWord(searchWord);
-                setStatus(true);
+                setStatus(false);
             }
         },[searchWord]);
 
@@ -101,12 +103,11 @@ export default function Header() {
     }
 
     const MyPageButton = () => {
-
         const { userEmail } = useParams();
         const onMyPageButtonClickHandler = () => {
-            if(!loginUser) return;
-            const { email } = loginUser;
-            navigate(USER_PATH(email));
+            if (loginUser) {
+                navigate(USER_PATH(loginUser.email));
+            }
         }
 
         const signOutResponse = (responseBody: SignOutResponseDto | ResponseDto | null) => {
@@ -207,27 +208,21 @@ export default function Header() {
     }
 
     useEffect(() => {
-
-        const isAuthPage = pathname.startsWith(AUTH_PATH());
-        setAuthPage(isAuthPage);
-        const isMainPage = pathname === MAIN_PATH();
-        setMainPage(isMainPage);
-        const isSearchPage = pathname.startsWith(SEARCH_PATH(''));
-        setSearchPage(isSearchPage);
-        const isBoardDetailPage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(''));
-        setBoardDetailPage(isBoardDetailPage);
-        const isBoardWritePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH());
-        setBoardWritePage(isBoardWritePage);
-        const isBoardUpdatePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(''));
-        setBoardUpdatePage(isBoardUpdatePage);
-        const isUserPage = pathname.startsWith(USER_PATH(''));
-        setUserPage(isUserPage);
+        const newState = {
+            isAuthPage: pathname.startsWith(AUTH_PATH()),
+            isMainPage: pathname === MAIN_PATH(),
+            isSearchPage: pathname.startsWith(SEARCH_PATH('')),
+            isBoardDetailPage: pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH('')),
+            isBoardWritePage: pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH()),
+            isBoardUpdatePage: pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH('')),
+            isUserPage: pathname.startsWith(USER_PATH(''))
+        };
+        setPageState(newState);
     }, [pathname]);
 
     useEffect(() => {
         setLogin(loginUser !== null);
     }, [loginUser]);
-
 
     return (
         <div id='header'>
@@ -240,15 +235,25 @@ export default function Header() {
                 </div>
                 <div className='header-right-box'>
                     {
-                        (isAuthPage || isBoardWritePage || !isBoardUpdatePage || isBoardDetailPage) &&
+                        (
+                            pageState.isAuthPage ||
+                            pageState.isBoardWritePage ||
+                            !pageState.isBoardUpdatePage ||
+                            pageState.isBoardDetailPage
+                        ) &&
                         <SearchButton />
                     }
                     {
-                        (isMainPage || isSearchPage || isBoardDetailPage || isUserPage) &&
+                        (
+                            pageState.isMainPage ||
+                            pageState.isSearchPage ||
+                            pageState.isBoardDetailPage ||
+                            pageState.isUserPage
+                        ) &&
                         <MyPageButton />
                     }
                     {
-                        (isBoardWritePage || isBoardUpdatePage ) &&
+                        (pageState.isBoardWritePage || pageState.isBoardUpdatePage ) &&
                         <UploadButton />
                     }
                 </div>

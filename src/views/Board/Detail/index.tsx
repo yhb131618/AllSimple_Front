@@ -309,7 +309,7 @@ export default function BoardDetail() {
                             <div className='board-detail-bottom-favorite-title'>
                                 {'좋아요  '}<span className='emphasis'>{favoriteList.length}</span></div>
                             <div className='board-detail-bottom-favorite-content'>
-                                {favoriteList.map(item => <FavoriteItem favoriteListItem={item}/>)}
+                                {favoriteList.map((item, index) => <FavoriteItem key={index} favoriteListItem={item}/>)}
                             </div>
                         </div>
                     </div>
@@ -320,7 +320,7 @@ export default function BoardDetail() {
                         <div className='board-detail-bottom-comment-title'>
                             {'댓글  '}<span className='emphasis'>{totalCommentCount}</span></div>
                         <div className='board-detail-bottom-comment-list-container'>
-                            {viewList.map(item => <CommentItem commentListItem={item} />)}
+                            {viewList.map((item,index) => <CommentItem key={index} commentListItem={item} />)}
                         </div>
                     </div>
                     <div className='divider'></div>
