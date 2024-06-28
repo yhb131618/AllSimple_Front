@@ -49,8 +49,6 @@ api.interceptors.response.use(
                     reIssueRequestDto
                 );
 
-                console.log("토큰 확인", response.data);
-
                 const { accessToken: newAccessToken, refreshToken: newRefreshToken , accessTokenExpiresIn} = response.data;
 
                 cookies.set('accessToken', newAccessToken, { path: '/', maxAge: accessTokenExpiresIn / 1000 });
