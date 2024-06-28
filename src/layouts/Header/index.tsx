@@ -72,7 +72,7 @@ export default function Header() {
         useEffect(()=> {
             if(searchWord) {
                 setWord(searchWord);
-                setStatus(true);
+                setStatus(false);
             }
         },[searchWord]);
 

@@ -62,9 +62,11 @@ export default function Search() {
 
     useEffect(() => {
         if(!searchWord) return;
-        getSearchBoardListRequest(searchWord, preSearchWord).then(getSearchBoardListResponse);
+        if(searchWord !== preSearchWord) {
+            getSearchBoardListRequest(searchWord, preSearchWord).then(getSearchBoardListResponse);
+        }
         getRelationListRequest(searchWord).then(getRelationListResponse);
-    }, [searchWord]);
+    }, [searchWord, preSearchWord]);
 
     if (!searchWord) return (<></>)
 
