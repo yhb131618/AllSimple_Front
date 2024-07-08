@@ -1,13 +1,8 @@
-import React, {ChangeEvent, useEffect, useRef, useState} from "react";
-import './style.css'
-import FavoriteItem from "../../../components/FavoriteItem";
-import {Board, CommentListItem, FavoriteListItem} from "../../../types/interface";
-import CommentItem from "../../../components/CommentItem";
-import Pagination from "../../../components/Pagination";
-import defaultProfileImage from 'assets/image/default-profile-image.png'
-import {useLoginUserStore} from "../../../stores";
-import {useNavigate, useParams} from "react-router-dom";
-import {BOARD_PATH, BOARD_UPDATE_PATH, MAIN_PATH, USER_PATH} from "../../../constant";
+import defaultProfileImage from 'assets/image/default-profile-image.png';
+import dayjs from "dayjs";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     deleteBoardRequest,
     getBoardRequest,
@@ -16,18 +11,23 @@ import {
     increaseViewCount, postCommentRequest,
     putFavoriteRequest
 } from "../../../apis";
-import GetBoardResponseDto from "../../../apis/response/board/get-board.response.dto";
-import {ResponseDto} from "../../../apis/response";
+import { PostCommentRequestDto } from "../../../apis/request/board";
+import { ResponseDto } from "../../../apis/response";
 import {
     DeleteBoardResponseDto,
     GetCommentListResponseDto,
     GetFavoriteListResponseDto,
     IncreaseViewCountResponseDto, PostCommentReponseDto, PutFavoriteResponseDto
 } from "../../../apis/response/board";
-import dayjs from "dayjs";
-import {useCookies} from "react-cookie";
-import {PostCommentRequestDto} from "../../../apis/request/board";
-import {usePaginaion} from "../../../hooks";
+import GetBoardResponseDto from "../../../apis/response/board/get-board.response.dto";
+import CommentItem from "../../../components/CommentItem";
+import FavoriteItem from "../../../components/FavoriteItem";
+import Pagination from "../../../components/Pagination";
+import { BOARD_PATH, BOARD_UPDATE_PATH, MAIN_PATH, USER_PATH } from "../../../constant";
+import { usePaginaion } from "../../../hooks";
+import { useLoginUserStore } from "../../../stores";
+import { Board, CommentListItem, FavoriteListItem } from "../../../types/interface";
+import './style.css';
 
 export default function BoardDetail() {
 
@@ -346,7 +346,9 @@ export default function BoardDetail() {
                                 </div>
                             </div>
                         </div>
+                                
                     }
+
                 </div>
                 }
             </div>

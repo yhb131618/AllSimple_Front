@@ -1,13 +1,10 @@
-import {SignInRequestDto, SignOutRequestDto, SignUpRequestDto} from "./request/auth";
-import {SignInResponseDto, SignUpResponseDto} from "./response/auth";
-import {ResponseDto} from "./response";
-import {
-    GetSignInUserResponseDto,
-    GetUserResponseDto,
-    PatchNicknameResponseDto,
-    PatchProfileImageResponseDto
-} from "./response/user";
-import {PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto} from "./request/board";
+import api, { apiV2 } from './api-instance';
+import { SignInRequestDto, SignOutRequestDto, SignUpRequestDto } from "./request/auth";
+import { PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto } from "./request/board";
+import { PostPlayRequestDto } from './request/play';
+import { PatchNicknameRequestDto, PatchProfileImageRequestDto } from "./request/user";
+import { ResponseDto } from "./response";
+import { SignInResponseDto, SignUpResponseDto } from "./response/auth";
 import {
     DeleteBoardResponseDto,
     GetBoardResponseDto,
@@ -23,10 +20,14 @@ import {
     PostCommentReponseDto,
     PutFavoriteResponseDto
 } from "./response/board";
-import {GetPopularListResponseDto, GetRelationListResponseDto} from "./response/search";
-import {PatchNicknameRequestDto, PatchProfileImageRequestDto} from "./request/user";
-import api from './api-instance';
-
+import { PostPlayResponseDto } from './response/play';
+import { GetPopularListResponseDto, GetRelationListResponseDto } from "./response/search";
+import {
+    GetSignInUserResponseDto,
+    GetUserResponseDto,
+    PatchNicknameResponseDto,
+    PatchProfileImageResponseDto
+} from "./response/user";
 
 const SIGN_IN_URL = () => '/auth/sign-in';
 const SIGN_OUT_URL = () => '/auth/sign-out';
@@ -85,6 +86,8 @@ const PUT_FAVORITE_URL = (boardNumber: number | string) => `/board/${boardNumber
 const GET_COMMENT_LIST_URL = (boardNumber: number | string) => `/board/${boardNumber}/comment-list`;
 const POST_COMMENT_URL = (boardNumber: number | string) => `/board/${boardNumber}/comment`
 const GET_SEARCH_BOARD_LIST_URL  = (searchWord: string, preSearchWord: string | null) => `/board/search-list/${searchWord}${preSearchWord? '/' + preSearchWord : ''}`;
+const POST_PLAY_URL = () => '/play';
+
 
 export const getBoardRequest = async (boardNumber: number | string) => {
     const result = await api.get(GET_BOARD_URL(boardNumber))
@@ -167,6 +170,20 @@ export const postBoardRequest = async (requestBody: PostBoardRequestDto) => {
     const result = await api.post(POST_BOARD_URL(), requestBody)
         .then(response => {
             const responseBody: PostBoardResponseDto = response.data;
+            return responseBody;
+        }).catch(error => {
+            if(!error.response) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
+
+
+export const postPlayRequest =  async (requestBody: PostPlayRequestDto) => {
+        const result = await apiV2.post(POST_PLAY_URL(), requestBody)
+        .then(response => {
+            const responseBody: PostPlayResponseDto = response.data;
             return responseBody;
         }).catch(error => {
             if(!error.response) return null;
@@ -340,7 +357,7 @@ export const patchProfileImageRequest = async (requestBody: PatchProfileImageReq
 
 const FILE_UPLOAD_URL = () => '/file/upload';
 
-const multipartFormData = { headers: {'Content-Type' : 'multipart/form-data'}};
+const multipartFormData = { headers: {'Content-Type' : 'multipart/form-data'},timeout: 600000 };
 
 export const fileUploadRequest = async (data: FormData) => {
     const result = await api.post(FILE_UPLOAD_URL(), data, multipartFormData)

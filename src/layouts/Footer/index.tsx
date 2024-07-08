@@ -1,5 +1,4 @@
-import React from 'react';
-import './style.css'
+import './style.css';
 
 export default function Footer() {
 
@@ -19,20 +18,22 @@ export default function Footer() {
                         <div className='icon-box-middle'>
                             <div className='icon logo-white'></div>
                         </div>
-                        <div className='footer-logo-text'>{'Yellow Board'}</div>
+                        <div className='footer-logo-text'>{'AllSimple Company'}</div>
                     </div>
                     <div className='footer-link-box'>
-                        <div className='footer-email-link'>{'yelloboard@yelloboard.com'}</div>
+                        <div className='footer-email-link'>{'yhb131618@naver.com'}</div>
                         <div className='icon-button'>
+                            {/* 깃블로그 아이콘 주소 변경 */}
                             <div className='icon insta-icon' onClick={onInstaIconButtonClickHandler}></div>
                         </div>
                         <div className='icon-button'>
+                            {/* 깃허브 아이콘 주소 변경 */}   
                             <div className='icon naver-blog-icon' onClick={onNaverBlogIconButtonClickHandler}></div>
                         </div>
                     </div>
                 </div>
                 <div className='footer-bottom'>
-                    <div className='footer-copyright'>{'© 2024 Yellow Board. All rights reserved.'}</div>
+                    <div className='footer-copyright'>{'© 2024 AllSimple. All rights reserved.'}</div>
                 </div>
             </div>
         </div>

@@ -1,19 +1,30 @@
 #footer {
-    min-width: 200px;
-    padding: 40px 0 50px 0;
-    background-color: rgba(255, 201, 14, 1);
+    padding: 10px 0 20px;
+    padding-left: 5%;
+    padding-right: 5%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-height: 120px;
+    box-sizing: border-box; /* padding을 포함하여 너비 계산 */
+    position: fixed;
+    background-color: rgba(55, 55, 55, 1);
+    bottom: 0; 
+    /* 부모 요소의 아래쪽에 고정시키기 위한 속성 */
+    /* bottom의 값이 커질수록 화면의 상단으로 이동함 */
 }
 
 .footer-container {
     width: 1200px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
 }
 
 .footer-top {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +39,7 @@
 .footer-logo-text {
     color: rgba(255, 255, 255, 1);
     font-weight: 400;
-    line-height: 140%;
+    line-height: 120%;
     font-family: Jaro;
     font-size: 36px;
     letter-spacing: 0.1px;

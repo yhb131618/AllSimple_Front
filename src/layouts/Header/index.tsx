@@ -1,24 +1,31 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect, useRef, useState} from "react";
-import './style.css'
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { PostPlayRequestDto } from "apis/request/play";
+import { PostPlayResponseDto } from "apis/response/play";
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { Cookies } from "react-cookie";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { fileUploadRequest, patchBoardRequest, postBoardRequest, postPlayRequest, signOutRequest } from "../../apis";
+import { SignOutRequestDto } from "../../apis/request/auth";
+import { PatchBoardRequestDto, PostBoardRequestDto } from "../../apis/request/board";
+import { ResponseDto } from "../../apis/response";
+import { SignOutResponseDto } from "../../apis/response/auth";
+import { PatchBoardResponseDto, PostBoardResponseDto } from "../../apis/response/board";
 import {
     AUTH_PATH,
     BOARD_DETAIL_PATH,
+    BOARD_MAIN_PATH,
     BOARD_PATH,
     BOARD_UPDATE_PATH,
     BOARD_WRITE_PATH,
+    IMAGE_MAIN_PATH,
     MAIN_PATH,
+    PLAY_MAIN_PATH,
+    PLAY_PATH,
+    PLAY_UPLOAD_PATH,
     SEARCH_PATH,
     USER_PATH
 } from "../../constant";
-import {Cookies} from "react-cookie";
-import {useBoardStore, useLoginUserStore} from "../../stores";
-import {fileUploadRequest, patchBoardRequest, postBoardRequest, signOutRequest} from "../../apis";
-import {PatchBoardRequestDto, PostBoardRequestDto} from "../../apis/request/board";
-import {PatchBoardResponseDto, PostBoardResponseDto} from "../../apis/response/board";
-import {ResponseDto} from "../../apis/response";
-import {SignOutRequestDto} from "../../apis/request/auth";
-import {SignOutResponseDto} from "../../apis/response/auth";
+import { useBoardStore, useLoginUserStore, usePlayStore } from "../../stores";
+import './style.css';
 
 export default function Header() {
 
@@ -36,13 +43,27 @@ export default function Header() {
         isBoardDetailPage: false,
         isBoardWritePage: false,
         isBoardUpdatePage: false,
-        isUserPage: false
+        isUserPage: false,
+        isPlayUploadPage: false,
+        isPlayMainPage: false,
+        isBoardMainPage: false,
+        isImageMainPage: false
     });
 
     const navigate = useNavigate();
 
     const onLogoClickHandler = () => {
         navigate(MAIN_PATH());
+    }
+    // 게시판 메인 페이지 이벤트 헨들러 //
+    const onBoardMainHandler = () => {
+        navigate(BOARD_MAIN_PATH());
+    }
+    const onPlayMainClickHandler = () => {
+        navigate(PLAY_MAIN_PATH());
+    }
+    const onImageMainClickHandler = () => {
+        navigate(IMAGE_MAIN_PATH());
     }
     const SearchButton = () => {
         const searchButtonRef = useRef<HTMLDivElement | null>(null);
@@ -146,11 +167,79 @@ export default function Header() {
         return <div className='black-button' onClick={onSignInButtonClickHandler}>{'로그인'}</div>
     };
 
-    const UploadButton = () => {
+    const PlayUploadButton = () => {
+     
+            const { title, content, playUrl, resetPlay }  = usePlayStore();
+            const [loading, setLoading] = useState(false);
 
+            const postPlayResponse = (responseBody: PostPlayResponseDto | ResponseDto | null) => {
+                if(!responseBody) return;
+                const { code } = responseBody;
+                if(code === 'DBE') alert('데이터베이스 오류입니다.')
+                if(code === 'AF' || code === 'NU') navigate(AUTH_PATH());
+                if(code === 'VF') alert('제목과 내용은 필수입니다.');
+                if(code !== 'SU') return;
+    
+                resetPlay();
+                if(!loginUser) return;
+                const { email } = loginUser;
+                navigate(USER_PATH(email));
+            }
+
+            const onPlayUploadButtonClickHandler = async () => {
+                const accessToken = cookies.get('accessToken');
+                if (!accessToken) return;
+                let play : string = "";
+
+                if (playUrl) {
+                    setLoading(true);
+                    const data = new FormData();
+                    data.append('file', playUrl);
+                    console.log("++++++++", data);
+
+                    try {
+                        const url = await fileUploadRequest(data);
+                        console.log("++++++++", url);
+                        if (url) {
+                            play = url;
+                        } else {
+                            console.error("File upload failed: URL is null or undefined");
+                        }
+                    } catch (error) {
+                        console.error("File upload failed", error);
+                        setLoading(false); // 업로드 실패 시 로딩 상태 해제
+                        return; // 파일 업로드 실패 시, 이후 로직을 실행하지 않음
+                    }
+                    setLoading(false); // 업로드 완료 시 로딩 상태 해제
+                }
+
+                const isPlayUploadPage = pathname === PLAY_PATH() + '/' + PLAY_UPLOAD_PATH();
+                if(isPlayUploadPage) {
+                    const requestBody: PostPlayRequestDto = {
+                        title, content, play
+                    }
+                    try {
+                        const response = await postPlayRequest(requestBody);
+                        postPlayResponse(response);
+                    } catch (error) {
+                        console.error("Post play request failed", error);
+                    }
+            }
+           }
+           //if(title && content )
+            return <div className='black-button' onClick={onPlayUploadButtonClickHandler}>{'업로드'}</div>
+            //return <div className='disable-button' >{'업로드'}</div>
+        }
+    
+
+        
+
+
+    const UploadButton = () => {
         const { boardNumber } = useParams();
         const { title, content, boardImageFileList, resetBoard }  = useBoardStore();
         const postBoardResponse = (responseBody: PostBoardResponseDto | ResponseDto | null) => {
+            
             if(!responseBody) return;
             const { code } = responseBody;
             if(code === 'DBE') alert('데이터베이스 오류입니다.')
@@ -164,6 +253,7 @@ export default function Header() {
             navigate(USER_PATH(email));
         }
 
+    
         const patchBoardResponse = (responseBody: PatchBoardResponseDto | ResponseDto| null) => {
             if(!responseBody) return;
             const { code } = responseBody;
@@ -175,7 +265,7 @@ export default function Header() {
             if(!boardNumber) return;
             navigate(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(boardNumber));
         }
-        const onUploadButtonClickHandler = async () => {
+        const onPlayUploadButtonClickHandler = async () => {
             const accessToken = cookies.get('accessToken');
             if (!accessToken) return;
 
@@ -201,11 +291,14 @@ export default function Header() {
                 patchBoardRequest(requestBody, boardNumber).then(patchBoardResponse);
             }
         }
+        
+
 
         if(title && content)
-        return <div className='black-button' onClick={onUploadButtonClickHandler}>{'업로드'}</div>
+        return <div className='black-button' onClick={onPlayUploadButtonClickHandler}>{'업로드'}</div>
         return <div className='disable-button' >{'업로드'}</div>
     }
+
 
     useEffect(() => {
         const newState = {
@@ -215,7 +308,11 @@ export default function Header() {
             isBoardDetailPage: pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH('')),
             isBoardWritePage: pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH()),
             isBoardUpdatePage: pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH('')),
-            isUserPage: pathname.startsWith(USER_PATH(''))
+            isUserPage: pathname.startsWith(USER_PATH('')),
+            isPlayUploadPage: pathname.startsWith(PLAY_PATH() + '/' + PLAY_UPLOAD_PATH()),
+            isPlayMainPage:  pathname.startsWith( PLAY_MAIN_PATH()),
+            isBoardMainPage:  pathname.startsWith( BOARD_MAIN_PATH()),
+            isImageMainPage:  pathname.startsWith(IMAGE_MAIN_PATH())
         };
         setPageState(newState);
     }, [pathname]);
@@ -233,28 +330,47 @@ export default function Header() {
                     </div>
                     <div className='header-logo'>{'Yellow Board'}</div>
                 </div>
+                <div className='header-page-button' onClick={onBoardMainHandler}>{'자유 게시판'}</div>
+                <div className='header-page-button'onClick={onPlayMainClickHandler}>{'동영상'}</div>
+                <div className='header-page-button' onClick={onImageMainClickHandler}>{'이미지'}</div>
+                {/* <div className='header-page-button' >{'음악'}</div>
+                <div className='header-page-button'>{'프로그램&코드'}</div>
+                <div className='header-page-button'>{'문의하기'}</div>
+                <div className='header-page-button'>{'채팅'}</div> */}
                 <div className='header-right-box'>
                     {
                         (
                             pageState.isAuthPage ||
                             pageState.isBoardWritePage ||
-                            !pageState.isBoardUpdatePage ||
-                            pageState.isBoardDetailPage
+                            !pageState.isBoardWritePage ||
+                            pageState.isBoardDetailPage ||
+                            pageState.isBoardMainPage ||
+                            pageState.isImageMainPage ||
+                            pageState.isPlayMainPage
                         ) &&
                         <SearchButton />
                     }
                     {
                         (
                             pageState.isMainPage ||
+                            pageState.isUserPage ||
+                            pageState.isBoardMainPage ||
+                            pageState.isImageMainPage ||
+                            pageState.isPlayMainPage ||
                             pageState.isSearchPage ||
-                            pageState.isBoardDetailPage ||
-                            pageState.isUserPage
+                            pageState.isBoardDetailPage 
+
                         ) &&
                         <MyPageButton />
                     }
                     {
-                        (pageState.isBoardWritePage || pageState.isBoardUpdatePage ) &&
+                        (pageState.isBoardWritePage || pageState.isBoardUpdatePage  
+                         ) &&
                         <UploadButton />
+                    }
+                    {
+                        (pageState.isPlayUploadPage ) &&
+                        <PlayUploadButton  />
                     }
                 </div>
             </div>
