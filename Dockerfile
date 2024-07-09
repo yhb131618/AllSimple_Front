@@ -1,5 +1,5 @@
 # Node.js 버전 지정
-FROM node:16 AS build
+FROM node:18 AS build
 
 # 앱 디렉토리 생성 및 설정
 WORKDIR /app
@@ -9,7 +9,6 @@ COPY package*.json ./
 
 # 패키지 설치
 RUN npm ci
-
 
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
