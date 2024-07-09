@@ -1,5 +1,5 @@
 # Node.js 버전 지정
-FROM node:17 AS build
+FROM node:16 AS build
 
 # export NODE_OPTIONS 설정 추가
 ENV NODE_OPTIONS=--openssl-legacy-provider
