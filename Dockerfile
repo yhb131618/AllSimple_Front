@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # 패키지 설치
-RUN npm install --only=prod --omit=dev
+RUN npm install --omit=dev
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
 
