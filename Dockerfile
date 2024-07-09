@@ -1,5 +1,5 @@
 # Node.js 버전 지정
-FROM node:18 AS build
+FROM node:latest AS build
 
 # 앱 디렉토리 생성 및 설정
 WORKDIR /app
