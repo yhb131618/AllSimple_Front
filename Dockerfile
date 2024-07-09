@@ -1,9 +1,6 @@
 # Node.js 버전 지정
 FROM node:16 AS build
 
-# export NODE_OPTIONS 설정 추가
-ENV NODE_OPTIONS=--openssl-legacy-provider
-
 # 앱 디렉토리 생성 및 설정
 WORKDIR /app
 
