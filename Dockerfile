@@ -1,5 +1,5 @@
 # Node.js 버전 지정
-FROM node:20 AS build
+FROM node:17 AS build
 
 # export NODE_OPTIONS 설정 추가
 ENV NODE_OPTIONS=--openssl-legacy-provider
@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # 패키지 설치
-RUN npm install --only=prod
+RUN npm install --production
 
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
