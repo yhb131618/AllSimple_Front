@@ -1,19 +1,16 @@
 # Node.js 버전 지정
 FROM node:20 AS build
+# Build stage
+FROM node:18 AS build
 
-# export NODE_OPTIONS 설정 추가
-ENV NODE_OPTIONS=--openssl-legacy-provider
-
-# 앱 디렉토리 생성 및 설정
+# 작업 디렉토리 설정
 WORKDIR /app
 
-# 패키지 설치 및 의존성 복사
-COPY package.json package-lock.json ./
+# package.json과 package-lock.json (있다면) 복사
+COPY package*.json ./
 
-# 패키지 설치
-RUN npm ci --omit=dev
-# TypeScript 설정 파일 복사
-COPY tsconfig.json ./
+# 의존성 설치
+RUN npm ci --only=production
 
 # 소스 코드 복사
 COPY . .
