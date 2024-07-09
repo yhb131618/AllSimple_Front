@@ -1,18 +1,21 @@
 # Node.js 버전 지정
-FROM node:18 AS build
+FROM node:16 AS build
 
 # 앱 디렉토리 생성 및 설정
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# 패키지 설치 및 의존성 복사
 COPY package*.json ./
 
-# Install all dependencies (including dev dependencies)
+# 패키지 설치
 RUN npm ci
 
-# Copy the rest of the application code
-COPY . .
 
+# TypeScript 설정 파일 복사
+COPY tsconfig.json ./
+
+# 소스 코드 복사
+COPY . .
 
 # 애플리케이션 빌드
 RUN npm run build
