@@ -1,5 +1,4 @@
-# Node.js 버전 지정
-FROM node:20 AS build
+
 # Build stage
 FROM node:18 AS build
 
