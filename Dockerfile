@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # 패키지 설치
-RUN npm ci
+RUN npm install
 
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
