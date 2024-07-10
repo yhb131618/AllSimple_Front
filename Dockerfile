@@ -1,5 +1,5 @@
 # Node.js 버전 지정
-FROM docker pull 192.168.77.32/common/node:20 AS build
+FROM 192.168.77.32/common/node:20 AS build
 
 # export NODE_OPTIONS 설정 추가
 ENV NODE_OPTIONS=--openssl-legacy-provider
@@ -25,7 +25,7 @@ COPY . .
 RUN yarn build
 
 # production 환경에서 실행할 최종 이미지
-FROM docker pull 192.168.77.32/common/nginx:1.21.5-alpine
+FROM 192.168.77.32/common/nginx:1.21.5-alpine
 
 # Nginx 설정 파일 복사
 COPY nginx.conf /etc/nginx/nginx.conf
