@@ -8,11 +8,10 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR /app
 
 # 패키지 설치 및 의존성 복사
-COPY package.json yarn.lock ./
+COPY package*.json ./
 
 # 패키지 설치
-# 네트워크 상태 확인 및 yarn 설치
-RUN yarn install --frozen-lockfile
+RUN npm install --frozen-lockfile
 
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
@@ -21,7 +20,7 @@ COPY tsconfig.json ./
 COPY . .
 
 # 애플리케이션 빌드
-RUN yarn build
+RUN npm run build
 
 # production 환경에서 실행할 최종 이미지
 FROM nginx:1.21.5-alpine
