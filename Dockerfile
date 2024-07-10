@@ -1,5 +1,5 @@
 # Node.js 버전 지정
-FROM node:20 AS build
+FROM docker pull 192.168.77.32/common/node:20 AS build
 
 # export NODE_OPTIONS 설정 추가
 ENV NODE_OPTIONS=--openssl-legacy-provider
@@ -11,7 +11,9 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 # 패키지 설치
-RUN yarn install --frozen-lockfile
+# 네트워크 상태 확인 및 yarn 설치
+RUN apk add --no-cache curl && curl -s https://registry.yarnpkg.com/ > /dev/null && yarn install --frozen-lockfile
+
 
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
@@ -23,7 +25,7 @@ COPY . .
 RUN yarn build
 
 # production 환경에서 실행할 최종 이미지
-FROM nginx:1.21.5-alpine
+FROM docker pull 192.168.77.32/common/nginx:1.21.5-alpine
 
 # Nginx 설정 파일 복사
 COPY nginx.conf /etc/nginx/nginx.conf
