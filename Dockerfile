@@ -12,8 +12,7 @@ COPY package.json yarn.lock ./
 
 # 패키지 설치
 # 네트워크 상태 확인 및 yarn 설치
-RUN apk add --no-cache curl && curl -s https://registry.yarnpkg.com/ > /dev/null && yarn install --frozen-lockfile
-
+RUN yarn install --frozen-lockfile
 
 # TypeScript 설정 파일 복사
 COPY tsconfig.json ./
