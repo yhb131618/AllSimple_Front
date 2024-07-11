@@ -5,8 +5,8 @@ import { ReIssueResponseDto } from "./response/auth";
 
 const cookies = new Cookies();
 
-const BASE_URL_V1 = 'http://localhost:3000/api/v1';
-const BASE_URL_V2 = 'http://localhost:3000/api/v2';
+const BASE_URL_V1 = 'http://localhost:80/api/v1';
+const BASE_URL_V2 = 'http://localhost:80/api/v2';
 const RE_ISSUE_URL = '/auth/re-issue';
 
 // v1 인스턴스 생성
