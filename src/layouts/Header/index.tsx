@@ -332,7 +332,7 @@ export default function Header() {
                 </div>
                 <div className='header-page-button' onClick={onBoardMainHandler}>{'자유 게시판'}</div>
                 <div className='header-page-button'onClick={onPlayMainClickHandler}>{'동영상'}</div>
-                <div className='header-page-button' onClick={onImageMainClickHandler}>{'이미지'}</div>
+                {/* <div className='header-page-button' onClick={onImageMainClickHandler}>{'이미지'}</div> */}
                 {/* <div className='header-page-button' >{'음악'}</div>
                 <div className='header-page-button'>{'프로그램&코드'}</div>
                 <div className='header-page-button'>{'문의하기'}</div>
