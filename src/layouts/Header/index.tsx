@@ -99,7 +99,7 @@ export default function Header() {
 
         if(status)
             return  (
-                <div className='icon-button' onClick={onSearchButtonClickHandler}>
+                <div className='search-icon-button' onClick={onSearchButtonClickHandler}>
                     <div className='icon search-light-icon'></div>
                 </div>
             );

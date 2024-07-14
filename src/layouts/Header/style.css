@@ -44,9 +44,22 @@
     gap: 15px;
     
 }
+.search-icon-button{
+    border: 1px solid rgba(157, 157, 157, 0.4);
+    border-radius: 24px;
+    padding: 0 3px 0 3px;
+    background-color: rgb(251, 249, 249);
+    border-radius: 50% 50%;
+    width: 24px;
+    height: 24px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 .header-search-input-box {
-    border: 1px solid rgba(65, 65, 65, 0.4);
+    border: 1px solid rgba(157, 157, 157, 0.4);
     border-radius: 43px;
     padding: 0 10px 0 12px;
     background-color: rgb(251, 249, 249);
@@ -64,7 +77,7 @@
     background: none;
     outline: none;
 
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 14px;
     font-weight: 400;
     line-height: 140%;

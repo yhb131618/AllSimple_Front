@@ -22,14 +22,14 @@
 }
 
 .black-button {
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgb(255, 255, 255);
     border-radius: 46px;
     width: 95px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgba(255, 255, 255, 1);
+    color: rgb(0, 0, 0);
 
     font-size: 14px;
     font-weight: 500;
@@ -38,7 +38,7 @@
 }
 
 .black-button:hover {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(248, 245, 215, 0.865);
 }
 
 .black-large-full-button {
@@ -59,7 +59,7 @@
 }
 
 .black-large-full-button:hover {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(232, 232, 232, 0.945);
 }
 
 .disable-button {
@@ -96,7 +96,7 @@
 }
 
 .white-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(232, 232, 232, 0.945);
 }
 
 .icon-box {
@@ -143,7 +143,7 @@
 }
 
 .icon-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(226, 226, 226, 0.945);
 }
 
 .icon {
