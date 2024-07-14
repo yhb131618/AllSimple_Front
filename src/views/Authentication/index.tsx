@@ -1,14 +1,14 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect, useRef, useState} from "react";
-import './style.css'
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { useCookies } from "react-cookie";
+import { Address, useDaumPostcodePopup } from "react-daum-postcode";
+import { useNavigate } from "react-router-dom";
+import { signInRequest, signUpRequest } from "../../apis";
+import { SignInRequestDto, SignUpRequestDto } from "../../apis/request/auth";
+import { ResponseDto } from "../../apis/response";
+import { SignInResponseDto } from "../../apis/response/auth";
 import InputBox from "../../components/InputBox";
-import {SignInRequestDto, SignUpRequestDto} from "../../apis/request/auth";
-import {signInRequest, signUpRequest} from "../../apis";
-import {ResponseDto} from "../../apis/response";
-import {SignInResponseDto} from "../../apis/response/auth";
-import {useCookies} from "react-cookie";
-import {MAIN_PATH} from "../../constant";
-import {useNavigate} from "react-router-dom";
-import {Address, useDaumPostcodePopup} from "react-daum-postcode";
+import { MAIN_PATH } from "../../constant";
+import './style.css';
 
 export default function Authentication() {
 
@@ -526,7 +526,7 @@ export default function Authentication() {
                     <div className='auth-jumbotron-contents' onClick={()=> navigator(MAIN_PATH())}>
                         <div className='auth-logo-icon'></div>
                         <div className='auth-jumbotron-text-box'>
-                            <div className='auth-jumbotron-text'>{'Yellow Board'}</div>
+                            <div className='auth-jumbotron-text'>{'Welcome Community'}</div>
                         </div>
                     </div>
                 </div>

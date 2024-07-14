@@ -8,8 +8,8 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-
-    background-color: rgba(255, 255, 255, 0.5);
+    height: 2%;
+    background-color: rgb(0, 0, 0);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -29,25 +29,27 @@
 }
 
 .header-logo {
-    color: rgba(255, 201, 14, 1);
+    color: rgb(255, 255, 255);
     font-family: Jaro;
     font-size: 36px;
     font-weight: 400;
     line-height: 140%;
     letter-spacing: 0.1px;
+    
 }
 
 .header-right-box {
     display: flex;
     align-items: center;
     gap: 15px;
+    
 }
 
 .header-search-input-box {
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(65, 65, 65, 0.4);
     border-radius: 43px;
     padding: 0 10px 0 12px;
-
+    background-color: rgb(251, 249, 249);
     width: 223px;
     height: 30px;
 
@@ -62,9 +64,12 @@
     background: none;
     outline: none;
 
-    color: rgba(0, 0, 0, 1);
+    color: rgb(255, 255, 255);
     font-size: 14px;
     font-weight: 400;
     line-height: 140%;
 }
 
+.header-page-button {
+    color: rgb(255, 255, 255);
+}

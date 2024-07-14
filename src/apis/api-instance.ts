@@ -4,9 +4,8 @@ import { ReIssueRequestDto } from "./request/auth";
 import { ReIssueResponseDto } from "./response/auth";
 
 const cookies = new Cookies();
-
-const BASE_URL_V1 = 'http://www.yhb-portfolio.store/api/v1';
-const BASE_URL_V2 = 'http://www.yhb-portfolio.store/api/v2';
+const BASE_URL_V1 = process.env.REACT_APP_API_URL1;
+const BASE_URL_V2 = process.env.REACT_APP_API_URL2;
 const RE_ISSUE_URL = '/auth/re-issue';
 
 // v1 인스턴스 생성

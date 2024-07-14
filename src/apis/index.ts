@@ -20,7 +20,7 @@ import {
     PostCommentReponseDto,
     PutFavoriteResponseDto
 } from "./response/board";
-import { PostPlayResponseDto } from './response/play';
+import { GetLatestPlayListResponseDto, PostPlayResponseDto } from './response/play';
 import { GetPopularListResponseDto, GetRelationListResponseDto } from "./response/search";
 import {
     GetSignInUserResponseDto,
@@ -87,7 +87,7 @@ const GET_COMMENT_LIST_URL = (boardNumber: number | string) => `/board/${boardNu
 const POST_COMMENT_URL = (boardNumber: number | string) => `/board/${boardNumber}/comment`
 const GET_SEARCH_BOARD_LIST_URL  = (searchWord: string, preSearchWord: string | null) => `/board/search-list/${searchWord}${preSearchWord? '/' + preSearchWord : ''}`;
 const POST_PLAY_URL = () => '/play';
-
+const GET_LATEST_PLAY_LIST_URL = ()=> '/play/latest-list';
 
 export const getBoardRequest = async (boardNumber: number | string) => {
     const result = await api.get(GET_BOARD_URL(boardNumber))
@@ -184,6 +184,19 @@ export const postPlayRequest =  async (requestBody: PostPlayRequestDto) => {
         const result = await apiV2.post(POST_PLAY_URL(), requestBody)
         .then(response => {
             const responseBody: PostPlayResponseDto = response.data;
+            return responseBody;
+        }).catch(error => {
+            if(!error.response) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
+
+export const getLatestPlayListRequest = async () => {
+    const result = await apiV2.get(GET_LATEST_PLAY_LIST_URL())
+        .then(response => {
+            const responseBody: GetLatestPlayListResponseDto = response.data;
             return responseBody;
         }).catch(error => {
             if(!error.response) return null;

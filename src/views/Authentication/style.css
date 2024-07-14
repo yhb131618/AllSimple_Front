@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgba(255, 201, 14, 1);
+    background-color: rgb(0, 0, 0);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: auto;
@@ -44,7 +44,7 @@
     width: 50px;
     height: 50px;
 
-    background-image: url(assets/image/logo_w.png);
+    background-image: url(assets/image/icon.png);
     background-position: 50% 50%;
     background-size: 100% 100%;
 }

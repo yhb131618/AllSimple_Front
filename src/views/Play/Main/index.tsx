@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getLatestBoardListRequest, getPopularListRequest, getTop3BoardListRequest } from "../../../apis";
+import { getLatestPlayListRequest, getPopularListRequest, getTop3BoardListRequest } from "../../../apis";
 import { ResponseDto } from "../../../apis/response";
-import { GetLatestBoardLiseResponseDto, GetTop3BoardListResponseDto } from "../../../apis/response/board";
+import { GetLatestPlayListResponseDto, GetTop3PlayListResponseDto } from "../../../apis/response/play";
 import { GetPopularListResponseDto } from "../../../apis/response/search";
-import BoardItem from "../../../components/BoardItem";
 import Pagination from "../../../components/Pagination";
-import Top3Item from "../../../components/Top3Item";
+import PlayItem from "../../../components/PlayItem";
 import { SEARCH_PATH } from "../../../constant";
 import { usePaginaion } from "../../../hooks";
-import { BoardListItem } from "../../../types/interface";
+import { PlayListItem } from "../../../types/interface";
 import './style.css';
 
 export default function PlayMain() {
@@ -17,16 +16,16 @@ export default function PlayMain() {
     const navigate = useNavigate();
     const MainTop = () => {
 
-        const [top3BoardList, setTop3BoardList] = useState<BoardListItem[]>([]);
+        const [top3BoardList, setTop3BoardList] = useState<PlayListItem[]>([]);
 
-        const getTop3BoardListResponse = (responseBody: GetTop3BoardListResponseDto | ResponseDto | null) => {
+        const getTop3BoardListResponse = (responseBody: GetTop3PlayListResponseDto | ResponseDto | null) => {
             if(!responseBody) return;
             const { code } = responseBody;
             if(code === 'DBE') alert('데이터베이스 오류입니다.');
             if(code !== 'SU') return;
 
-            const { top3List } = responseBody as GetTop3BoardListResponseDto;
-            setTop3BoardList(top3List);
+            // const { top3List } = responseBody as GetTop3BoardListResponseDto;
+            // setTop3BoardList(top3List);
         }
 
         useEffect(() => {
@@ -34,18 +33,17 @@ export default function PlayMain() {
         }, []);
 
         return (
-            <div id='main-top-wrapper'>
-                <div className='main-top-container'>
-                    <div className='main-top-title'>
-                        {'Welcome to Yellow Board,'}<br />
-                        {'Dive into the action! 🚀'}
+            <div id='play-main-top-wrapper'>
+                <div className='play-main-top-container'>
+                    <div className='play-main-top-title'>
+           
                     </div>
-                    <div className='main-top-contents-box'>
-                        <div className='main-top-contents-title'>{'주간 TOP3 Hot 동영상'}</div>
-                        <div className='main-top-contents'>
+                    <div className='play-main-top-contents-box'>
+                        <div className='play-main-top-contents-title'>{'주간 TOP3 Hot 동영상'}</div>
+                        {/* <div className='play-main-top-contents'>
                             {top3BoardList.map((top3ListItem, index) =>
                                 <Top3Item key={index} top3ListItem={top3ListItem}/>)}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -63,23 +61,23 @@ export default function PlayMain() {
             viewPageList,
             totalSection,
             setTotalList
-        } = usePaginaion<BoardListItem>(5);
+        } = usePaginaion<PlayListItem>(5);
 
-        const [currentBoardList, setCurrentBoardList] = useState<BoardListItem[]>([]);
+        const [currentPlayList, setCurrentPlayList] = useState<PlayListItem[]>([]);
         const [popularWordList, setPopularWordList] = useState<string[]>([]);
 
         const onPupularWordClickHandler = (word:string) => {
             navigate(SEARCH_PATH(word));
         }
 
-        const getLatestBoardListResponse = (responseBody: GetLatestBoardLiseResponseDto | ResponseDto | null) => {
+        const getLatestPlayListResponse = (responseBody: GetLatestPlayListResponseDto | ResponseDto | null) => {
             if(!responseBody) return;
             const { code } = responseBody;
             if(code === 'DBE') alert('데이터베이스 오류입니다.');
             if(code !== 'SU') return;
 
-            const { latestList } = responseBody as GetLatestBoardLiseResponseDto;
-            setCurrentBoardList(latestList);
+            const { latestList } = responseBody as GetLatestPlayListResponseDto;
+            setCurrentPlayList(latestList);
             setTotalList(latestList);
         }
 
@@ -94,34 +92,34 @@ export default function PlayMain() {
         }
 
         useEffect(() => {
-            getLatestBoardListRequest().then(getLatestBoardListResponse)
+            getLatestPlayListRequest().then(getLatestPlayListResponse)
             getPopularListRequest().then(getPopularListResponse)
         }, []);
 
         return (
-            <div id='main-bottom-wrapper'>
-                <div className="main-bottom-container">
-                    <div className="main-bottom-title">{'최신 게시물'}</div>
-                    <div className="main-bottom-contents-box">
-                        <div className="main-bottom-current-contents">
-                            {viewList.map((boardListItem, index) =>
-                                <BoardItem key={index} boardListItem={boardListItem}/>)}
+            <div id='play-main-bottom-wrapper'>
+                <div className="play-main-bottom-container">
+                    <div className="play-main-bottom-title">{'최신 게시물'}</div>
+                    <div className="play-main-bottom-contents-box">
+                        <div className="play-main-bottom-current-contents">
+                            {viewList.map((playListItem, index) =>
+                                <PlayItem key={index} playListItem={playListItem}/>)}
                         </div>
-                        <div className="main-bottom-popular-box">
-                            <div className="main-bottom-popular-card">
-                                <div className="main-bottom-popular-card-box">
-                                    <div className="main-bottom-popular-card-container">
-                                        <div className="main-bottom-popular-card-title">{'인기 검색어'}</div>
-                                        <div className="main-bottom-popular-card-contents">
+                        {/* <div className="play-main-bottom-popular-box">
+                            <div className="play-main-bottom-popular-card">
+                                <div className="play-main-bottom-popular-card-box">
+                                    <div className="play-main-bottom-popular-card-container">
+                                        <div className="play-main-bottom-popular-card-title">{'인기 검색어'}</div>
+                                        <div className="play-main-bottom-popular-card-contents">
                                             {popularWordList.map((word, index) =>
                                                 <div key={index} className="word-badge" onClick={() => onPupularWordClickHandler(word)}>{word}</div>)}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
-                    <div className="main-bottom-pagination-box">
+                    <div className="play-main-bottom-pagination-box">
                         <Pagination
                             currentPage={currentPage}
                             currentSection={currentSection}

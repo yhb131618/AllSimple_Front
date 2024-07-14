@@ -79,4 +79,6 @@
     right: 20px;
 }
 
-
+.play-box-light-icon{
+    background-image: url(assets/image/play.png);
+}

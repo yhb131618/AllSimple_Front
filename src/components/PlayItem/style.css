@@ -1,0 +1,102 @@
+.play-list-item {
+    padding: 24px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+}
+.play-list-item:hover {
+    background-color: rgb(238, 237, 237);
+}
+
+.play-list-item-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.play-list-item-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.play-list-item-profile-box {
+    width: 32px;
+    height: 32px;
+}
+
+.play-list-item-profile-image {
+    border-radius: 50% 50%;
+    width: 100%;
+    height: 100%;
+    background-position: 50% 50%;
+    background-size: 100% 100%;
+}
+
+.play-list-item-write-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.play-list-item-nickname {
+    color: rgba(0 ,0 ,0 ,0.7);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.play-list-item-write-date {
+    color: rgba(0 ,0 ,0 ,0.4);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 140%;
+}
+
+.play-list-item-middle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.play-list-item-title {
+    color: rgba(0, 0, 0, 1);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.play-list-item-content {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 140%;
+}
+
+.play-list-item-bottom {
+
+}
+
+.play-list-item-counts {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 140%;
+}
+
+.play-list-item-image{
+    border-radius: 10px 10px;
+    width: 100%;
+    height: 100%;
+    background-position: 50% 50%;
+    background-size: 100% 100%;
+}
+
+
+.play-list-item-video {
+    width: 90%;
+    height: 90%;
+}

@@ -37,8 +37,7 @@ export default function Main() {
             <div id='main-top-wrapper'>
                 <div className='main-top-container'>
                     <div className='main-top-title'>
-                        {'Welcome to Yellow Board,'}<br />
-                        {'Dive into the action! 🚀'}
+              
                     </div>
                     <div className='main-top-contents-box'>
                         <div className='main-top-contents-title'>{'주간 TOP3 게시글'}</div>

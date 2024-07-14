@@ -91,7 +91,7 @@ export default function PlayUpload() {
                                   value={content}
                                   onChange={onContentChangeHandler}/>
                         <div className='icon-button' onClick={onPlayUploadButtonClickHandler}>
-                            <div className='icon image-box-light-icon'></div>
+                            <div className='icon play-box-light-icon'></div>
                         </div>
                         <input ref={playInputRef} type='file' accept='video/*' style={{display: "none"}}
                                onChange={onPlayChangeHandler}

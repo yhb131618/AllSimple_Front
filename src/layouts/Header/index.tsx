@@ -328,7 +328,7 @@ export default function Header() {
                     <div className='icon-box-middle'>
                         <div className='icon logo-yellow'></div>
                     </div>
-                    <div className='header-logo'>{'Yellow Board'}</div>
+                    <div className='header-logo'>{'AllSimple'}</div>
                 </div>
                 <div className='header-page-button' onClick={onBoardMainHandler}>{'자유 게시판'}</div>
                 <div className='header-page-button'onClick={onPlayMainClickHandler}>{'동영상'}</div>

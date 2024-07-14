@@ -3,11 +3,11 @@ import './style.css';
 export default function Footer() {
 
     const onInstaIconButtonClickHandler = () => {
-        window.open('https://www.instagram.com');
+        window.open('https://github.com/yhb131618');
     }
 
     const onNaverBlogIconButtonClickHandler = () => {
-        window.open('https://blog.naver.com');
+        window.open('https://yhb131618.github.io');
     }
 
     return (
@@ -24,11 +24,11 @@ export default function Footer() {
                         <div className='footer-email-link'>{'yhb131618@naver.com'}</div>
                         <div className='icon-button'>
                             {/* 깃블로그 아이콘 주소 변경 */}
-                            <div className='icon insta-icon' onClick={onInstaIconButtonClickHandler}></div>
+                            <div className='icon github-icon' onClick={onInstaIconButtonClickHandler}></div>
                         </div>
                         <div className='icon-button'>
                             {/* 깃허브 아이콘 주소 변경 */}   
-                            <div className='icon naver-blog-icon' onClick={onNaverBlogIconButtonClickHandler}></div>
+                            <div className='icon git-blog-icon' onClick={onNaverBlogIconButtonClickHandler}></div>
                         </div>
                     </div>
                 </div>

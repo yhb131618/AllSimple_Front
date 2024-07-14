@@ -162,11 +162,11 @@
     background-image: url(assets/image/eye-light-on.png);
 }
 
-.insta-icon {
-    background-image: url(assets/image/insta.png);
+.github-icon {
+    background-image: url(assets/image/giticon.png);
 }
 
-.naver-blog-icon {
+.git-blog-icon {
     background-image: url(assets/image/naver-blog.png);
 }
 
@@ -243,14 +243,14 @@
 }
 
 .logo-black {
-    background-image: url(assets/image/logo_b.png);
+    background-image: url(assets/image/icon.png);
 }
 
 .logo-white {
-    background-image: url(assets/image/logo_w.png);
+    background-image: url(assets/image/icon.png);
 }
 
 .logo-yellow {
-    background-image: url(assets/image/logo_y.png);
+    background-image: url(assets/image/icon.png);
 }
 
