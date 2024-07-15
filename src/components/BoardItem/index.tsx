@@ -1,9 +1,8 @@
-import React from "react";
-import './style.css'
-import { BoardListItem } from "../../types/interface";
+import defaultProfileImage from 'assets/image/default-profile-image.png';
 import { useNavigate } from "react-router-dom";
-import defaultProfileImage from 'assets/image/default-profile-image.png'
-import {BOARD_DETAIL_PATH, BOARD_PATH} from "../../constant";
+import { BOARD_DETAIL_PATH, BOARD_PATH } from "../../constant";
+import { BoardListItem } from "../../types/interface";
+import './style.css';
 
 interface Props {
     boardListItem: BoardListItem;
@@ -16,7 +15,7 @@ export default function BoardItem({ boardListItem }: Props) {
     const { writeDatetime, writerNickname, writerProfileImage } = boardListItem;
 
     const navigate = useNavigate();
-
+    console.log( writeDatetime);
     const onClickHandler = () => {
         navigate(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(boardNumber));
     }

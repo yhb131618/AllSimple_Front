@@ -1,9 +1,9 @@
 .play-list-item {
-    padding: 24px;
+    padding: 9px;
     background-color: white;
     display: flex;
-    align-items: center;
-    gap: 30px;
+    flex-direction: column;
+    gap: 5x;
     cursor: pointer;
 }
 .play-list-item:hover {
@@ -13,8 +13,8 @@
 .play-list-item-box {
     flex: 1;
     display: flex;
-    flex-direction: column;
     gap: 16px;
+    padding-bottom: 9px;
 }
 
 .play-list-item-top {
@@ -24,16 +24,18 @@
 }
 
 .play-list-item-profile-box {
+    align-items: center;
     width: 32px;
     height: 32px;
 }
 
 .play-list-item-profile-image {
     border-radius: 50% 50%;
+    align-items : stretch;
     width: 100%;
     height: 100%;
     background-position: 50% 50%;
-    background-size: 100% 100%;
+    background-size: 200%  200%;
 }
 
 .play-list-item-write-box {
@@ -44,16 +46,17 @@
 
 .play-list-item-nickname {
     color: rgba(0 ,0 ,0 ,0.7);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     line-height: 140%;
 }
 
 .play-list-item-write-date {
-    color: rgba(0 ,0 ,0 ,0.4);
-    font-size: 12px;
+    color: rgb(82, 82, 82);
+    font-size: 16px;
     font-weight: 400;
     line-height: 140%;
+    padding-bottom: 5px
 }
 
 .play-list-item-middle {
@@ -64,7 +67,7 @@
 
 .play-list-item-title {
     color: rgba(0, 0, 0, 1);
-    font-size: 16px;
+    font-size: 30px;
     font-weight: 500;
     line-height: 140%;
 }
@@ -77,14 +80,17 @@
 }
 
 .play-list-item-bottom {
+    margin-left: auto;
 
+    
 }
 
 .play-list-item-counts {
     color: rgba(0, 0, 0, 0.7);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 140%;
+    
+
 }
 
 .play-list-item-image{
@@ -97,6 +103,8 @@
 
 
 .play-list-item-video {
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
+
+    
 }

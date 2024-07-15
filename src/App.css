@@ -233,6 +233,9 @@
 .edit-icon {
     background-image: url(assets/image/edit-light.png);
 }
+.play-edit-icon {
+    background-image: url(assets/image/play.png);
+}
 
 .image-box-white-icon {
     background-image: url(assets/image/image-box-white-light.png);

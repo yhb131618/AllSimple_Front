@@ -1,11 +1,7 @@
-import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
-import './style.css'
-import defaultProfileImage from 'assets/image/default-profile-image.png'
-import {useNavigate, useParams} from 'react-router-dom';
-import {BoardListItem} from "../../types/interface";
-import BoardItem from "../../components/BoardItem";
-import {BOARD_PATH, BOARD_WRITE_PATH, MAIN_PATH, USER_PATH} from "../../constant";
-import {useLoginUserStore} from "../../stores";
+import defaultProfileImage from 'assets/image/default-profile-image.png';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useCookies } from "react-cookie";
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     fileUploadRequest,
     getUserBoardListRequest,
@@ -13,13 +9,17 @@ import {
     patchNicknameRequest,
     patchProfileImageRequest
 } from "../../apis";
-import {GetUserResponseDto, PatchNicknameResponseDto, PatchProfileImageResponseDto} from "../../apis/response/user";
-import {ResponseDto} from "../../apis/response";
-import {PatchNicknameRequestDto, PatchProfileImageRequestDto} from "../../apis/request/user";
-import {useCookies} from "react-cookie";
-import {usePaginaion} from "../../hooks";
+import { PatchNicknameRequestDto, PatchProfileImageRequestDto } from "../../apis/request/user";
+import { ResponseDto } from "../../apis/response";
+import { GetUserBoardListResponseDto } from "../../apis/response/board";
+import { GetUserResponseDto, PatchNicknameResponseDto, PatchProfileImageResponseDto } from "../../apis/response/user";
+import BoardItem from "../../components/BoardItem";
 import Pagination from "../../components/Pagination";
-import {GetUserBoardListResponseDto} from "../../apis/response/board";
+import { BOARD_PATH, BOARD_WRITE_PATH, MAIN_PATH, PLAY_PATH, PLAY_UPLOAD_PATH, USER_PATH } from "../../constant";
+import { usePaginaion } from "../../hooks";
+import { useLoginUserStore } from "../../stores";
+import { BoardListItem } from "../../types/interface";
+import './style.css';
 
 export default function UserPage() {
 
@@ -207,7 +207,13 @@ export default function UserPage() {
             }
             ;
         }
-
+        const onSideCardPlayUploadClickHandler = () => {
+            if (isMyPage) navigate(PLAY_PATH() + '/' + PLAY_UPLOAD_PATH());
+            else if (loginUser) {
+                navigate(USER_PATH(loginUser.email))
+            }
+            ;
+        }
         const getUserBoardListResponse = (responseBody: GetUserBoardListResponseDto | ResponseDto | null) => {
             if(!responseBody) return;
             const { code } = responseBody;
@@ -246,7 +252,7 @@ export default function UserPage() {
                                                                                             boardListItem={boardListItem}/>)}
                                 </div>
                         }
-                        <div className='user-bottom-side-box'>
+                        <div className='user-bottom-play-side-box'>
                             <div className='user-bottom-side-card' onClick={onSideCardClickHandler}>
                                 <div className='user-bottom-side-container'>
                                     {isMyPage ?
@@ -255,6 +261,25 @@ export default function UserPage() {
                                                 <div className='icon edit-icon'></div>
                                             </div>
                                             <div className='user-bottom-side-test'>{'글쓰기'}</div>
+                                        </>
+                                        :
+                                        <>
+                                            <div className='user-bottom-side-test'>{'내 게시물로 가기'}</div>
+                                            <div className='icon-box'>
+                                                <div className='icon arrow-right-icon'></div>
+                                            </div>
+                                        </>
+                                    }
+                                </div>
+                            </div>
+                            <div className='user-bottom-play-side-card' onClick={onSideCardPlayUploadClickHandler}>
+                                <div className='user-bottom-side-container'>
+                                    {isMyPage ?
+                                        <>
+                                            <div className='icon-box'>
+                                                <div className='icon play-edit-icon'></div>
+                                            </div>
+                                            <div className='user-bottom-side-test'>{'동영상 업로드'}</div>
                                         </>
                                         :
                                         <>

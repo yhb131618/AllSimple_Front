@@ -4,7 +4,6 @@ import { getLatestPlayListRequest, getPopularListRequest, getTop3BoardListReques
 import { ResponseDto } from "../../../apis/response";
 import { GetLatestPlayListResponseDto, GetTop3PlayListResponseDto } from "../../../apis/response/play";
 import { GetPopularListResponseDto } from "../../../apis/response/search";
-import Pagination from "../../../components/Pagination";
 import PlayItem from "../../../components/PlayItem";
 import { SEARCH_PATH } from "../../../constant";
 import { usePaginaion } from "../../../hooks";
@@ -99,7 +98,7 @@ export default function PlayMain() {
         return (
             <div id='play-main-bottom-wrapper'>
                 <div className="play-main-bottom-container">
-                    <div className="play-main-bottom-title">{'최신 게시물'}</div>
+                    <div className="play-main-bottom-title">{'최신 업로드'}</div>
                     <div className="play-main-bottom-contents-box">
                         <div className="play-main-bottom-current-contents">
                             {viewList.map((playListItem, index) =>
@@ -119,16 +118,7 @@ export default function PlayMain() {
                             </div>
                         </div> */}
                     </div>
-                    <div className="play-main-bottom-pagination-box">
-                        <Pagination
-                            currentPage={currentPage}
-                            currentSection={currentSection}
-                            setCurrentPage={setCurrentPage}
-                            setCurrentSection={setCurrentSection}
-                            viewPageList={viewPageList}
-                            totalSection={totalSection}
-                        />
-                    </div>
+    
                 </div>
             </div>
         )
