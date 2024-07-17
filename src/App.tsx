@@ -8,6 +8,7 @@ import {
     IMAGE_MAIN_PATH,
     IMAGE_PATH,
     MAIN_PATH,
+    PLAY_DETAIL_PATH,
     PLAY_MAIN_PATH,
     PLAY_PATH,
     PLAY_UPLOAD_PATH,
@@ -17,6 +18,7 @@ import {
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Route, Routes } from "react-router-dom";
+import PlayDetail from "views/Play/Detail";
 import PlayUpload from "views/Play/Upload";
 import './App.css';
 import { getSignInUserRequest } from "./apis";
@@ -73,6 +75,7 @@ function App() {
                 <Route path={USER_PATH(':userEmail')} element={<UserP/>}/>
                 <Route path={PLAY_PATH()}> 
                     <Route path={PLAY_MAIN_PATH()} element={<PlayMain/>}/>
+                    <Route path={PLAY_DETAIL_PATH(':playNumber')} element={<PlayDetail/>}/>
                     <Route path={PLAY_UPLOAD_PATH()} element={<PlayUpload/>}/> 
                 </Route>
                 <Route path={IMAGE_PATH()}> 

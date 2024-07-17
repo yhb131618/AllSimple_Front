@@ -2,6 +2,7 @@ import defaultProfileImage from 'assets/image/default-profile-image.png';
 import dayjs from "dayjs";
 import { useRef } from 'react';
 import { useNavigate } from "react-router-dom";
+import { PLAY_DETAIL_PATH, PLAY_PATH } from "../../constant";
 import { PlayListItem } from "../../types/interface";
 import './style.css';
 interface Props {
@@ -32,7 +33,7 @@ export default function PlayItem({ playListItem }: Props) {
 
 
     const onClickHandler = () => {
-        // navigate(PLAY_PATH() + '/' + PLAY_DETAIL_PATH(boardNumber));
+        navigate(PLAY_PATH() + '/' + PLAY_DETAIL_PATH(playNumber));
     }
 
 

@@ -10,6 +10,9 @@ export const BOARD_UPDATE_PATH = (boardNUmber: string | number) => `update/${boa
 export const PLAY_PATH = () => '/play';
 export const PLAY_MAIN_PATH = () => '/play/main';
 export const PLAY_UPLOAD_PATH = () => 'upload';
+export const PLAY_DETAIL_PATH = (playNumber: string | number)=> `detail/${playNumber}`;
+export const PLAY_WRITE_PATH = () => 'write';
+export const PLAY_UPDATE_PATH = (playNUmber: string | number) => `update/${playNUmber}`;
 export const IMAGE_MAIN_PATH = () => '/image/main';
 export const IMAGE_PATH = () => 'image';
 

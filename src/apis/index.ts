@@ -20,13 +20,14 @@ import {
     PostCommentReponseDto,
     PutFavoriteResponseDto
 } from "./response/board";
-import { GetLatestPlayListResponseDto, PostPlayResponseDto } from './response/play';
+import { DeletePlayResponseDto, GetLatestPlayListResponseDto, GetPlayResponseDto, IncreasePlayViewCountResponseDto, PostPlayResponseDto } from './response/play';
+
 import { GetPopularListResponseDto, GetRelationListResponseDto } from "./response/search";
 import {
     GetSignInUserResponseDto,
     GetUserResponseDto,
     PatchNicknameResponseDto,
-    PatchProfileImageResponseDto
+    PatchProfileImageResponseDto,
 } from "./response/user";
 
 const SIGN_IN_URL = () => '/auth/sign-in';
@@ -74,6 +75,7 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 }
 
 const GET_BOARD_URL = (boardNumber: number | string) => `/board/${boardNumber}`;
+
 const POST_BOARD_URL = () =>  '/board';
 const GET_USER_BOARD_URL = (email: string) => `/board/user-board-list/${email}`;
 const GET_LATEST_BOARD_LIST_URL= () => '/board/latest-list';
@@ -88,6 +90,22 @@ const POST_COMMENT_URL = (boardNumber: number | string) => `/board/${boardNumber
 const GET_SEARCH_BOARD_LIST_URL  = (searchWord: string, preSearchWord: string | null) => `/board/search-list/${searchWord}${preSearchWord? '/' + preSearchWord : ''}`;
 const POST_PLAY_URL = () => '/play';
 const GET_LATEST_PLAY_LIST_URL = ()=> '/play/latest-list';
+const INCREASE_PLAY_VIEW_COUNT_URL =  (playNumber: number | string) => `/play/${playNumber}/increase-play-view-count`;
+const GET_PLAY_URL = (playNumber: number | string) => `/play/${playNumber}`;
+const DELETE_PLAY_URL = (playNumber: number | string) =>  `/play/${playNumber}`;
+
+export const getPlayRequest = async (playNumber: number | string) => {
+    const result = await apiV2.get(GET_PLAY_URL(playNumber))
+        .then(response => {
+            const responseBody: GetPlayResponseDto = response.data;
+            return responseBody;
+        }).catch(error => {
+            if(!error.response) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
 
 export const getBoardRequest = async (boardNumber: number | string) => {
     const result = await api.get(GET_BOARD_URL(boardNumber))
@@ -165,6 +183,17 @@ export const increaseViewCount = async (boardNumber: number | string) => {
         })
     return result;
 }
+export const increasePlayViewCount = async (playNumber: number | string) => {
+    const result = apiV2.get(INCREASE_PLAY_VIEW_COUNT_URL(playNumber))
+        .then(response => {
+            const responseBody: IncreasePlayViewCountResponseDto = response.data;
+            return responseBody;
+        }).catch(error => {
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
 
 export const postBoardRequest = async (requestBody: PostBoardRequestDto) => {
     const result = await api.post(POST_BOARD_URL(), requestBody)
@@ -230,7 +259,18 @@ export const deleteBoardRequest = async (boardNumber: number | string) => {
         })
     return result;
 }
-
+export const deletePlayRequest = async (playNumber: number | string) => {
+    const result = await apiV2.delete(DELETE_PLAY_URL(playNumber))
+        .then(response => {
+            const responseBody: DeletePlayResponseDto = response.data;
+            return responseBody;
+        }).catch(error => {
+            if(!error.response) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
 export const getFavoriteListRequest = async (boardNumber: number | string) => {
     const result = await api.get(GET_FAVORITE_LIST_URL(boardNumber))
         .then(reponse => {
