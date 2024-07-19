@@ -60,7 +60,7 @@ export default function PlayMain() {
             viewPageList,
             totalSection,
             setTotalList
-        } = usePaginaion<PlayListItem>(5);
+        } = usePaginaion<PlayListItem>(100);
 
         const [currentPlayList, setCurrentPlayList] = useState<PlayListItem[]>([]);
         const [popularWordList, setPopularWordList] = useState<string[]>([]);
