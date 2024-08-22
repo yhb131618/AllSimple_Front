@@ -11,6 +11,7 @@ export default function Container() {
 
     return (
         <>
+            {/* login 페이지에 헤더나와 풋터가 필요없음 */}
             {pathname === AUTH_PATH() ?
                 <Outlet/>
             :
@@ -27,7 +28,7 @@ export default function Container() {
 }
 
 const OutletWrapper = styled.div`
-  margin-top: 90px;
+  margin-top: 40px;
   padding-bottom: 90px;
 `
 

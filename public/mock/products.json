@@ -1,0 +1,53 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Wireless Mouse",
+      "provider": "Logitech",
+      "price": "14000",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fc.pxhere.com%2Fphotos%2F8d%2Fce%2Fwicker_baskets_weave_willow_braided_material_craft_market_sell-1356885.jpg%21d&type=a340"
+    },
+    {
+      "id": 2,
+      "name": "Mechanical Keyboard",
+      "provider": "Keychron",
+      "price": "13000",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fc.pxhere.com%2Fphotos%2F8a%2Ffd%2Fphoto-8109.jpg%21d&type=a340"
+    },
+    {
+      "id": 3,
+      "name": "27-inch Monitor",
+      "provider": "Samsung",
+      "price": "29900",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.utoimage.com%2Fpreview%2Fcp867655%2F2016%2F11%2F201611000239_500.jpg&type=a340"
+    },
+    {
+      "id": 4,
+      "name": "Bluetooth Headphones",
+      "provider": "Sony",
+      "price": "19900",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fc.pxhere.com%2Fphotos%2F97%2F37%2Fclock_time_of_time_clock_face_old_old_fashioned_time_indicating_retro-797190.jpg%21d&type=a340"
+    },
+    {
+      "id": 5,
+      "name": "Laptop Stand",
+      "provider": "Rain Design",
+      "price": "3900",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.utoimage.com%2Fpreview%2Fcp867655%2F2016%2F11%2F201611000311_500.jpg&type=a340"
+    },
+    {
+      "id": 6,
+      "name": "External Hard Drive",
+      "provider": "Seagate",
+      "price": "79000",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fc.pxhere.com%2Fphotos%2Fc3%2F9b%2Fphoto-75248.jpg%21d&type=sc960_832"
+    },
+    {
+      "id": 7,
+      "name": "USB-C Hub",
+      "provider": "Anker",
+      "price": "4999",
+      "image": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fc.pxhere.com%2Fphotos%2F4a%2Fc1%2Fbarrels_white_bar-728969.jpg%21d&type=a340"
+    }
+  ]
+}

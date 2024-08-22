@@ -15,4 +15,6 @@ export const PLAY_WRITE_PATH = () => 'write';
 export const PLAY_UPDATE_PATH = (playNUmber: string | number) => `update/${playNUmber}`;
 export const IMAGE_MAIN_PATH = () => '/image/main';
 export const IMAGE_PATH = () => 'image';
-
+export const SHOP_PATH = () => '/shop';
+export const SHOP_MAIN_PATH = () => '/shop/main';
+export const SHOP_DETAIL_PATH  = (productNumber: string | number)=> `detail/${productNumber}`;

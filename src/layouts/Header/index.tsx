@@ -22,6 +22,7 @@ import {
     PLAY_PATH,
     PLAY_UPLOAD_PATH,
     SEARCH_PATH,
+    SHOP_MAIN_PATH,
     USER_PATH
 } from "../../constant";
 import { useBoardStore, useLoginUserStore, usePlayStore } from "../../stores";
@@ -61,6 +62,10 @@ export default function Header() {
     }
     const onPlayMainClickHandler = () => {
         navigate(PLAY_MAIN_PATH());
+    }
+
+    const onShopMainClickHandler = () => {
+        navigate(SHOP_MAIN_PATH());
     }
     const onImageMainClickHandler = () => {
         navigate(IMAGE_MAIN_PATH());
@@ -312,7 +317,8 @@ export default function Header() {
             isPlayUploadPage: pathname.startsWith(PLAY_PATH() + '/' + PLAY_UPLOAD_PATH()),
             isPlayMainPage:  pathname.startsWith( PLAY_MAIN_PATH()),
             isBoardMainPage:  pathname.startsWith( BOARD_MAIN_PATH()),
-            isImageMainPage:  pathname.startsWith(IMAGE_MAIN_PATH())
+            isImageMainPage:  pathname.startsWith(IMAGE_MAIN_PATH()),
+            isShopMainPage: pathname.startsWith(SHOP_MAIN_PATH())
         };
         setPageState(newState);
     }, [pathname]);
@@ -331,7 +337,8 @@ export default function Header() {
                     <div className='header-logo'>{'AllSimple'}</div>
                 </div>
                 <div className='header-page-button' onClick={onBoardMainHandler}>{'자유 게시판'}</div>
-                <div className='header-page-button'onClick={onPlayMainClickHandler}>{'동영상'}</div>
+                <div className='header-page-button'onClick={onPlayMainClickHandler}>{'Play'}</div>
+                <div className='header-page-button'onClick={onShopMainClickHandler}>{'Shop'}</div>
                 {/* <div className='header-page-button' onClick={onImageMainClickHandler}>{'이미지'}</div> */}
                 {/* <div className='header-page-button' >{'음악'}</div>
                 <div className='header-page-button'>{'프로그램&코드'}</div>
